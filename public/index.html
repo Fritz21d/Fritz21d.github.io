@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <html>
+  <head>
+    <link rel="stylesheet" href="https://restcountries.eu/rest/v2/all" />
+    <link rel="stylesheet" href="https://restcountries.eu/rest/v2/name/eesti" />
+    <script src="https://restcountries.eu/rest/v2/all"></script>
+    <!-- 載入 leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    
+    <link rel="stylesheet" href="/path/to/leaflet.css" />
+    <script src="/path/to/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+    
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"/>
+  </head>
+  <body>
+    <div id="myMap"></div>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      #myMap {
+        width: 100vw;
+        height: 100vh;
+      }
+      
+    </style>
+    <script>
+
+     // 模擬資料
+      const data = [
+        { name: "夢時代購物中心", local: [22.595153, 120.306923] },
+        { name: "東京", local: [ 35.6810912, 139.7671861] },
+        { name: "漢神巨蛋", local: [22.669603, 120.302288] },
+        { name: "大統百貨", local: [22.630748, 120.318033] }
+      ];
+      // 設定地圖中心點與放大倍率
+      const map = L.map("myMap", {
+        center: [22.630748, 120.318033],
+        zoom: 13
+      });
+      // 載入圖資
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>         contributors'
+      }).addTo(map);
+      // 創建 icon (金色)
+      const goldIcon = new L.Icon({
+        iconUrl:
+          "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png",
+        shadowUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+      // 創建 icon (黑色)
+      const blackIcon = new L.Icon({
+        iconUrl:
+          "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png",
+        shadowUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+      // 處理資料
+      data.forEach(item => {
+        // 夢時代購物中心 icon 顯示金色，其餘則為黑色
+        let myIcon;
+        if (item.name === "夢時代購物中心") {
+          myIcon = goldIcon;
+        } else {
+          myIcon = blackIcon;
+        }
+        // 添加標記點
+        L.marker(item.local, {
+          title: item.name,
+          icon: myIcon
+        })
+        .addTo(map)
+        .bindPopup(item.name);
+      });
+    </script>
+
+    <script
+      src="https://unpkg.com/leaflet@2.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin="">
+  </script>
+  </body>
+</html>
