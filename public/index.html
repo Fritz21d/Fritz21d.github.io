@@ -2,24 +2,32 @@
 <html lang="en">
   <html>
   <head>
-    <link rel="stylesheet" href="https://restcountries.eu/rest/v2/all" />
-    <link rel="stylesheet" href="https://restcountries.eu/rest/v2/name/eesti" />
-    <script src="https://restcountries.eu/rest/v2/all"></script>
-    <!-- 載入 leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"/> 
+       <!-- 載入 leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    
     <link rel="stylesheet" href="/path/to/leaflet.css" />
     <script src="/path/to/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js">
   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-  crossorigin=""></script>
-    
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"/>
+  crossorigin="">
+</script>
   </head>
-  <body>
+  <body>    
+    <!-- 加入組件 tag
+<v-marker-cluster>
+  <l-marker :lat-lng="item.local" v-for="item in data" :key="item.id">
+    <l-icon
+      :icon-url="item.name === '夢時代購物中心' ? icon.type.gold : icon.type.black"
+      :shadow-url="icon.shadowUrl"
+      :icon-size="icon.iconSize"
+      :icon-anchor="icon.iconAnchor"
+      :popup-anchor="icon.popupAnchor"
+      :shadow-size="icon.shadowSize"
+    />
+    <l-popup></l-popup>
+  </l-marker>
+</v-marker-cluster> -->
     <div id="myMap"></div>
     <style>
       html,
@@ -31,12 +39,12 @@
         width: 100vw;
         height: 100vh;
       }
-      
+    
     </style>
     <script>
-
+      
      // 模擬資料
-      const data = [
+    const.data = [
         { name: "夢時代購物中心", local: [22.595153, 120.306923] },
         { name: "東京", local: [ 35.6810912, 139.7671861] },
         { name: "漢神巨蛋", local: [22.669603, 120.302288] },
@@ -47,6 +55,7 @@
         center: [22.630748, 120.318033],
         zoom: 13
       });
+      
       // 載入圖資
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
@@ -91,12 +100,10 @@
         .addTo(map)
         .bindPopup(item.name);
       });
-    </script>
 
-    <script
-      src="https://unpkg.com/leaflet@2.0/dist/leaflet.js"
-      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-      crossorigin="">
-  </script>
-  </body>
+     
+    </script>
+   
+
+</body>
 </html>

@@ -11,7 +11,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: '這是首頁，所以 Harden 不動'
+      msg: '這是首頁'
     }
   }
 }

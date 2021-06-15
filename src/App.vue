@@ -1,17 +1,28 @@
 <template>
   <div id="app">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.71/dist/leaflet.css"
-   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-   crossorigin=""/>
-   
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"/>
-<link rel="stylesheet"  href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"/>
-
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<!--Fullscreen
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'
+        rel='stylesheet' />-->
 </div>
 </template>
+
 <script>
+import L from 'leaflet';
+const LMap = L.map(document.getElementById('map'), {
+            center: [23.5, 121],
+            zoom: 17,
+            crs: L.CRS.EPSG3857,
+            fullscreenControl: true,
+        });
 export default {
   name: "App",
+  components: {
+            LMap,
+            LMarker,
+            VGeosearch,
+          },
   data() {
     return {
       // 模擬資料
@@ -21,10 +32,13 @@ export default {
         { id: 3, name: "漢神巨蛋", local: [22.669603, 120.302288] },
         { id: 4, name: "大統百貨", local: [22.630748, 120.318033] }
       ],
-      zoom: 20,
+      zoom: 13,
       center: [22.61942, 120.296386],
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution: `© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`,
+      geosearchOptions: { 
+        provider: new OpenStreetMapProvider(),
+      },
       options: {
         zoomControl: false
       },
@@ -59,33 +73,6 @@ export default {
     });
   }
 };
-</script>
-
-<style>
-  html,body {
-    padding: 0;
-    margin: 0;
-  }
-</style>
-
-<script>
-export default {
-  name: 'App',
-  components: {
-  },
-};
-
-<style lang="scss">
-@import 'bootstrap/scss/bootstrap';
-import 'bootstrap/dist/css/bootstrap.css'
-</style>
-</script>
-
-
-
-
-
-
 
 
 
