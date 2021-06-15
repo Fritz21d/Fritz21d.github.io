@@ -7,21 +7,16 @@
         rel='stylesheet' />-->
 </div>
 </template>
-
 <script>
-import L from 'leaflet';
-const LMap = L.map(document.getElementById('map'), {
-            center: [23.5, 121],
-            zoom: 17,
-            crs: L.CRS.EPSG3857,
-            fullscreenControl: true,
-        });
 export default {
   name: "App",
   components: {
-            LMap,
+            LMap, 
             LMarker,
-            VGeosearch,
+            LPopup,
+            LTileLayer, 
+            LIcon,
+            VGeosearch
           },
   data() {
     return {
@@ -36,6 +31,7 @@ export default {
       center: [22.61942, 120.296386],
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution: `© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`,
+      fullscreenControl: true,
       geosearchOptions: { 
         provider: new OpenStreetMapProvider(),
       },
